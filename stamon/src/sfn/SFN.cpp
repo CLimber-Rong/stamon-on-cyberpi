@@ -40,6 +40,9 @@ void sfn_typeof(SFN_PARA_LIST);
 void sfn_throw(SFN_PARA_LIST);
 void sfn_version(SFN_PARA_LIST);
 
+void sfn_random(SFN_PARA_LIST);
+void sfn_wait_ab(SFN_PARA_LIST);
+
 namespace stamon::sfn {
 class SFN {
 	StringMap<void(SFN_PARA_LIST)> sfn_functions;
@@ -65,6 +68,8 @@ public:
 		sfn_functions.put(StamonString("typeof"), sfn_typeof);
 		sfn_functions.put(StamonString("throw"), sfn_throw);
 		sfn_functions.put(StamonString("version"), sfn_version);
+		sfn_functions.put(StamonString("random"), sfn_random);
+		sfn_functions.put(StamonString("wait_ab"), sfn_wait_ab);
 	}
 	void call(StamonString port, datatype::Variable *arg) {
 		if (sfn_functions.containsKey(port) == 0) {
@@ -253,5 +258,17 @@ void sfn_version(SFN_PARA_LIST) {
 			toString(stamon::STAMON_VER_X) + StamonString((char *) ".")
 			+ toString(stamon::STAMON_VER_Y) + StamonString((char *) ".")
 			+ toString(stamon::STAMON_VER_Z));
+	return;
+}
+
+void sfn_random(SFN_PARA_LIST) {
+	arg->data = manager->MallocObject<stamon::datatype::IntegerType>(
+		get_random_num()
+	);
+	return;
+}
+
+void sfn_wait_ab(SFN_PARA_LIST) {
+	wait_a_b_button();
 	return;
 }

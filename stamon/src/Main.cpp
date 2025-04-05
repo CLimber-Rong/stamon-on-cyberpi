@@ -323,8 +323,8 @@ void RunStamon(void* ptr) {
         (char*)"stamon",
         (char*)"run",
         (char*)"demo.stvc",
-		(char*)"--MemLimit=4096",
-		(char*)"--MemPoolCache=1024"
+		(char*)"--MemLimit=8192",
+		(char*)"--MemPoolCache=4096"
     };
 
 	StamonMain(4, argv);
@@ -334,13 +334,11 @@ void setup() {
 	Serial.begin(112500);
     delay(1000);
     cyber.begin();
-    cyber.set_bitmap(4,4,cyber.create_text(L"Stamon启动中",0xffff,(uint8_t)15));
+    cyber.set_bitmap(4,4,cyber.create_text(String2Wchart("Stamon启动中..."),0xffff,(uint8_t)15));
 	cyber.render_lcd();
 	RunStamon(NULL);
 }
 
 void loop() {
-	if(cyber.get_button_a() || cyber.get_button_b()) {
-		RunStamon(NULL);
-	}
+	RunStamon(NULL);
 }

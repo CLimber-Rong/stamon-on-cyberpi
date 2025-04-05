@@ -20,3 +20,11 @@ func int(s) {
 func len(n) {
     return native("len", n);
 }
+
+func random() {
+    return native("random", null);
+}
+
+func wait_ab() {
+    return native("wait_ab", null);
+}

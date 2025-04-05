@@ -1,7 +1,7 @@
 import re
 import os
 
-os.system("cd program&&stamon build main.st program.stvc --strip=true&&cd ..")
+os.system("cd program&&stamon build main.st main.stvc --strip=true&&cd ..")
 
 def getSource(filename):
     f = open(filename, 'r', encoding='utf8')
@@ -24,7 +24,7 @@ def GenFileData(code: bytes) -> bytes:
             rst += str(int(i)) + ','
         return rst[0:-1] + '}'
 
-fin = open('program/program.stvc', 'rb')
+fin = open('program/main.stvc', 'rb')
 
 fout = open('stamon/include/cyberpi_implemented/BinarySTVC.cpp', 'w', encoding='utf8')
 fout.write('''
@@ -53,6 +53,9 @@ src = '''
 #include"string.h"
 #include"ctype.h"
 #include"stddef.h"
+#include"time.h"
+#include"locale.h"
+#include"wchar.h"
 #include"cyberpi.h"\n
 '''
 
